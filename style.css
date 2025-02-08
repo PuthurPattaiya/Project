@@ -1,0 +1,275 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body */
+body {
+  font-family: 'Arial', sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background: linear-gradient(135deg, #f7f7f7, #e0f7fa);
+}
+
+/* Header */
+header {
+  background-color: rgba(76, 175, 80, 0.9);
+  color: white;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.logo h1 {
+  font-size: 2.5em;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.logo p {
+  font-size: 1.1em;
+  margin-top: 5px;
+}
+
+nav ul {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  margin-top: 10px;
+}
+
+nav ul li {
+  margin: 0 20px;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.2em;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: color 0.3s;
+}
+
+nav ul li a:hover {
+  color: #ffeb3b;
+}
+
+/* Background image section below navbar */
+
+
+/* Main Section */
+main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 40px;
+  min-height: 80vh;
+  background-image: url('images/navee.jpg') center center fixed;
+  border-radius: 15px;
+  margin: 20px auto;
+  width: 90%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+main:hover {
+  transform: scale(1.02);
+}
+
+.content {
+  
+  max-width: 50%;
+ 
+}
+
+.content h1 {
+  
+  color: #4CAF50;
+  font-size: 2.5em;
+  margin-bottom: 10px;
+  letter-spacing: 2px;
+}
+
+.content h2 {
+  font-size: 1.2em;
+  color: #333;
+}
+
+.content p {
+  font-size: 1.1em;
+  color: #555;
+  margin: 20px 0;
+  line-height: 1.8;
+}
+/* Image Styling */
+.image img {
+  max-width: 400px;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform: scale(1);
+  transition: transform 0.3s ease;
+}
+
+.image img:hover {
+  transform: scale(1.05);
+}
+
+.buttons {
+  margin-top: 20px;
+}
+
+.btn {
+  padding: 12px 25px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-size: 1em;
+  margin-right: 20px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  letter-spacing: 1px;
+}
+
+.btn.primary {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.btn.primary:hover {
+  background-color: #45A049;
+}
+
+.btn.secondary {
+  background-color: #FFF;
+  color: #4CAF50;
+  border: 2px solid #4CAF50;
+}
+
+.btn.secondary:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+
+
+
+/* Guideline Section */
+.guideline-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
+  background-color: #f4f4f4;
+}
+
+.guideline-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 40px;
+  max-width: 1500px;
+  transition: transform 0.3s ease;
+ 
+}
+
+.guideline-item:hover {
+  transform: scale(1.05);
+}
+
+.guideline-image img {
+  max-width: 350px;
+  border-radius: 10px;
+  margin-right: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.guideline-text {
+  max-width: 500px;
+}
+
+.guideline-text h3 {
+  font-size: 2.5em;
+  color: #4CAF50;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+}
+
+.guideline-text p {
+  font-size: 1.1em;
+  color: #555;
+  line-height: 1.8;
+}
+
+/* Services Section */
+.services-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 30px;
+  padding: 40px;
+}
+
+.service {
+  width: 30%;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.service:hover {
+  transform: translateY(-10px);
+}
+
+.service h3 {
+  font-size: 1.8em;
+  color: #4CAF50;
+  margin-bottom: 10px;
+}
+
+.service p {
+  font-size: 1.1em;
+  color: #555;
+  line-height: 1.8;
+}
+
+/* Footer */
+footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+footer p {
+  margin: 0;
+  font-size: 1.1em;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  main {
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+
+  .guideline-item {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .guideline-image {
+    margin-bottom: 20px;
+  }
+
+  .guideline-text {
+    max-width: 90%;
+  }
+
+  .service {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}
