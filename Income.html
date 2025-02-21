@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Income & Expense Tracker</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            color: #000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color:lightgray
+        }
+        .container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            margin-top: 20px;
+            gap: 20px;
+        }
+        .profile-section {
+            width: 25%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .profile-img {
+            width: 350px;
+            height: 350px;
+            border-radius: 80%;
+            border: 5px solid #dbf62c;
+            object-fit: cover;
+        }
+        .welcome-banner {
+            background: #c9ff28;
+            color: rgb(113, 20, 110);
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .main-section {
+            width: 50%;
+            background:rgb(223, 148, 118);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        select, input, button {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            width: 250px;
+        }
+        button {
+            background: #28a745;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .guidelines {
+            width: 25%;
+            background: #ffebcc;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+        .guidelines h2 {
+            text-align: center;
+            color: #ff5733;
+            margin-bottom: 10px;
+        }
+        .guidelines ul {
+            list-style: none;
+            padding: 0;
+        }
+        .guidelines li {
+            padding: 10px;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .guidelines li::before {
+            content: "\1F4B8"; /* Money bag emoji */
+            font-size: 20px;
+        }
+        table {
+            width: 90%;
+            margin-top: 20px;
+            border-collapse: collapse;
+            background: #fff;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #000;
+        }
+        th { background: #ff5733; color: white; }
+        canvas {
+            max-width: 400px;
+            max-height: 400px;
+            margin: 20px auto;
+        }
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+            }
+            .profile-section, .guidelines, .main-section {
+                width: 100%;
+                text-align: center;
+            }
+            .guidelines li {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="profile-section">
+            <img src="D:\Main Project\images\logo1.jpg" alt="Finance Image" class="profile-img">
+            <div class="welcome-banner">🎉 Welcome to Your Financial Tracker! 💰</div>
+        </div>
+        <div class="main-section">
+            <h1>Income & Expense Tracker</h1><br>
+            <h2>Money Manager</h2><br>
+            <form id="transactionForm">
+                <input type="number" id="amount" placeholder="Enter Amount" required>
+                <select id="category" required>
+                    <option disabled selected>Select Category</option>
+                    <option>Transport</option>
+                    <option>Health</option>
+                    <option>Study</option>
+                    <option>Food</option>
+                    <option>Salary</option>
+                    <option>Petty Cash</option>
+                    <option>Entertainment</option>
+                </select>
+                <select id="type" required>
+                    <option disabled selected>Choose Income/Expense</option>
+                    <option>Income</option>
+                    <option>Expense</option>
+                </select>
+                <select id="payment-method" required>
+                    <option disabled selected>Select Payment Method</option>
+                    <option>Cash</option>
+                    <option>Credit Card</option>
+                    <option>Debit Card</option>
+                    <option>Bank Transfer</option>
+                    <option>Other</option>
+                </select>
+                <input type="text" id="notes" placeholder="Notes (Optional)">
+                <button type="submit">Add</button>
+            </form>
+        </div>
+        <div class="guidelines">
+            <h2>💰 Finance Guidelines 💡</h2>
+            <ul>
+                <li>Track all your expenses. 📊</li><br>
+                <li>Set a monthly budget. 🏦</li><br>
+                <li>Save at least 20% of your income. 💵</li><br>
+                <li>Avoid unnecessary debts. 🚫</li><br>
+                <li>Invest wisely for future stability. 📈</li>
+            </ul>
+        </div>
+    </div><br><hr>
+    <h2>Income Report</h2>
+    <table id="income-table">
+        <tr><th>Date</th><th>Category</th><th>Amount</th><th>Notes</th></tr>
+    </table><br>
+    <h2>Expense Report</h2>
+    <table id="expense-table">
+        <tr><th>Date</th><th>Category</th><th>Amount</th><th>Notes</th></tr>
+    </table>
+
+    
+</body>
+  </html>
