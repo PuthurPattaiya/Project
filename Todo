@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #9f61b3c9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .header {
+            width: 100%;
+            background: #4a90e2;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .container {
+            display: flex;
+            width: 90%;
+            height: 80vh;
+            margin-top: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background: rgb(56, 134, 165);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .left-container {
+            width: 40%;
+            background: #cdcd54;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .task-box {
+            width: 90%;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+            cursor: pointer;
+            font-weight: bold;
+            color: white;
+            text-align: left;
+            font-size: 16px;
+        }
+
+        .task-box img {
+            width: 40px;
+            height: 40px;
+        }
+
+        .personal { background: #ff6f61; }
+        .work { background: #f4a261; }
+        .shopping { background: #2a9d8f; }
+        .coding { background: #264653; }
+        .health { background: #e76f51; }
+
+        .right-container {
+            width: 60%;
+            background: rgb(180, 224, 99);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+            overflow-y: auto;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        input[type="text"] {
+            width: 80%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 8px 12px;
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            width: 80%;
+        }
+
+        li {
+            padding: 10px;
+            background-color: #ffffff;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">Hello User, You Have <span id="totalTasks">0</span> Tasks</div>
+    <div class="container">
+        <div class="left-container">
+            <div class="task-box personal" onclick="showTasks('personalTasks')">
+                <span>Personal</span>
+                <img src="https://cdn-icons-png.flaticon.com/512/1946/1946429.png" alt="Personal">
+            </div>
+            <div class="task-box work" onclick="showTasks('workTasks')">
+                <span>Work</span>
+                <img src="https://cdn-icons-png.flaticon.com/512/2282/2282263.png" alt="Work">
+            </div>
+            <div class="task-box shopping" onclick="showTasks('shoppingTasks')">
+                <span>Shopping</span>
+                <img src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" alt="Shopping">
+            </div>
+            <div class="task-box coding" onclick="showTasks('codingTasks')">
+                <span>Coding</span>
+                <img src="https://cdn-icons-png.flaticon.com/512/3063/3063176.png" alt="Coding">
+            </div>
+            <div class="task-box health" onclick="showTasks('healthTasks')">
+                <span>Health</span>
+                <img src="https://cdn-icons-png.flaticon.com/512/2784/2784539.png" alt="Health">
+            </div>
+        </div>
+        
+        <div class="right-container" id="tasksDisplay">
+            <h2 id="taskCategory">Tasks (<span id="taskCount">0</span>)</h2>
+            <input type="text" id="taskInput" placeholder="Add a task...">
+            <button onclick="addTask()">Add</button>
+            <ul id="taskList"></ul>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let currentCategory = "";
+
+            function updateTotalTasks() {
+                let total = 0;
+                ["personalTasks", "workTasks", "shoppingTasks", "codingTasks", "healthTasks"].forEach(category => {
+                    total += (localStorage.getItem(category) || "").split("<li>").length - 1;
+                });
+                document.getElementById("totalTasks").textContent = total;
+            }
+
+            window.showTasks = function (category) {
+                currentCategory = category;
+                document.getElementById("taskCategory").textContent = category.replace("Tasks", "") + " Tasks";
+                document.getElementById("taskList").innerHTML = localStorage.getItem(category) || "";
+                updateTaskCount();
+            };
+
+            window.addTask = function () {
+                const input = document.getElementById("taskInput");
+                if (input.value.trim() !== "") {
+                    const li = document.createElement("li");
+                    li.innerHTML = `${input.value} <button onclick="completeTask(this)">✔</button>`;
+                    document.getElementById("taskList").prepend(li);
+                    saveTasks();
+                    input.value = "";
+                    updateTaskCount();
+                }
+            };
+
+            window.completeTask = function (button) {
+                button.parentNode.style.textDecoration = "line-through";
+                button.parentNode.style.backgroundColor = "#d4edda";
+                button.remove();
+                saveTasks();
+            };
+
+            function saveTasks() {
+                localStorage.setItem(currentCategory, document.getElementById("taskList").innerHTML);
+                updateTotalTasks();
+            }
+
+            function updateTaskCount() {
+                const count = document.getElementById("taskList").children.length;
+                document.getElementById("taskCount").textContent = count;
+            }
+
+            updateTotalTasks();
+        });
+    </script>
+</body>
+</html>
